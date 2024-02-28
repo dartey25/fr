@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "nx run helper:build:production",
+    "beforeDevCommand": "nx run helper:serve",
+    "devPath": "http://localhost:4200",
+    "distDir": "apps/helper/"
+  },
+  "package": {
+    "productName": "md-helper",
+    "version": "0.0.1"
+  },
+  "tauri": {
+    "allowlist": {
+      "shell": {
+        "all": true,
+        "scope": [
+          {
+            "name": "node version",
+            "cmd": "node",
+            "args": ["-v"]
+          },
+          {
+            "name": "npx nvm install",
+            "cmd": "nvm",
+            "args": ["install", "18.5.0"]
+          },
+          {
+            "name": "npx nvm use",
+            "cmd": "nvm",
+            "args": ["use", "18.5.0"]
+          }
+        ]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.tauri.dev",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "MD Web Extended (Helper)",
+        "width": 800
+      }
+    ]
+  }
+}

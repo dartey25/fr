@@ -1,0 +1,69 @@
+{
+  "name": "license-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/license-server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/license-server",
+        "external": ["oracledb"],
+        "format": ["esm"],
+        "bundle": true,
+        "main": "apps/license-server/src/server.ts",
+        "tsConfig": "apps/license-server/tsconfig.app.json",
+        "assets": ["apps/license-server/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "license-server:build",
+        "inspect": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "license-server:build:development"
+        },
+        "production": {
+          "buildTarget": "license-server:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/license-server/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

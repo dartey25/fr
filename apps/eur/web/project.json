@@ -1,0 +1,75 @@
+{
+  "name": "eur-web",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/eur/web/src",
+  "projectType": "application",
+  "implicitDependencies": ["ui", "zod-schema"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/eur/web"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production",
+          "dev": false,
+          "prod": true
+        }
+      },
+      "dependsOn": ["^build"]
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "eur-web:build",
+        "proxyConfig": "apps/eur/web/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "eur-web:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "eur-web:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "eur-web:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "eur-web:build:development"
+        },
+        "production": {
+          "buildTarget": "eur-web:build:production"
+        }
+      },
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/apps/eur/web"
+      },
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

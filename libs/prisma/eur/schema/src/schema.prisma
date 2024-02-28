@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../../../node_modules/@prisma/client/eur"
+}
+datasource db {
+  provider = "postgres"
+  url      = "postgresql://postgres:root@localhost:5432/mdweb"
+}
+
+model Certificate {
+  id                           String    @id @default(cuid())
+  cert_num                     String?
+  cert_lang                    String?
+  exporter_tax                 Int?
+  exporter_eori                String?
+  exporter_name                String
+  exporter_address             String
+  btw2_code                    String
+  btw2_name                    String
+  destination_eori             String?
+  destination_name             String?
+  destination_address          String?
+  destination_cnt              String?
+  destination_country          String?
+  orig_code                    String?
+  orig_name                    String?
+  dest_code                    String?
+  dest_name                    String?
+  transport                    String?
+  remarks                      String?
+  goods                        Goods[]
+  customs_permission_ce_place  String?
+  customs_permission_ce_date   DateTime?
+  customs_permission_ce_name   String?
+  customs_permission_cust_name String?
+  customs_permission_gtd_type  String?
+  customs_permission_gtd_num   String?
+  customs_permission_gtd_date  DateTime?
+
+  declaration_place       String
+  declaration_date        DateTime
+  declaration_name        String
+  receive_form_conditions String?
+  receive_form_docs       String?
+  receive_form_app_place  String?
+  receive_form_app_date   DateTime?
+  receive_form_app_fio    String?
+
+  added_docs AddedDocs[]
+
+  created_at DateTime             @default(now())
+  edited_at  DateTime?
+  history    CertificateHistory[]
+}
+
+model Goods {
+  id          String      @id @default(cuid())
+  certificate Certificate @relation(fields: [cert_id], references: [id], onDelete: Cascade)
+  cert_id     String
+  name        String?
+  quant       Int?
+  unit_code   Int?
+  unit_name   String?
+  inv_num     String?
+  inv_date    DateTime?
+  created_at  DateTime
+  edited_at   DateTime?
+}
+
+model AddedDocs {
+  id           String      @id @default(cuid())
+  certificate  Certificate @relation(fields: [cert_id], references: [id], onDelete: Cascade)
+  cert_id      String
+  doc_type     Int?
+  doc_num      String?
+  doc_date     DateTime?
+  file_name    String?
+  file_type    String?
+  file_size    Int?
+  file_content String?
+  created_at   DateTime
+  edited_at    DateTime?
+}
+
+model CertificateHistory {
+  id          String      @id @default(cuid())
+  certificate Certificate @relation(fields: [cert_id], references: [id], onDelete: Cascade)
+  cert_id     String
+  action      String
+  created_at  DateTime    @default(now())
+}
+
+model UploadImfx {
+  id                   String              @id @default(uuid())
+  certId               String
+  docList              Bytes
+  docListSign          Bytes?
+  doc1                 Bytes?
+  doc1Sign             Bytes?
+  createDate           DateTime            @default(now())
+  createUser           String
+  modifyDate           DateTime?
+  modifyUser           String?
+  deleteDate           DateTime?
+  deleteUser           String?
+  senderEmail          String?
+  senderName           String?
+  recipient            String?
+  muid                 String?
+  imfxContent          Bytes?
+  imfxFilename         String?
+  sessionPassRaw       Bytes?
+  sessionPass          String?
+  encryptedSessPassRaw Bytes?
+  encryptedSessPass    String?
+  encryptedImfxRaw     Bytes?
+  encryptedImfx        String?
+  response             String?
+  attachments          UploadAttachments[]
+}
+
+model UploadAttachments {
+  id              String     @id @default(uuid())
+  uploadPackage   UploadImfx @relation(fields: [uploadPackageId], references: [id], onDelete: Cascade)
+  uploadPackageId String
+  docLink         Int?
+  fileName        String?
+  fileContent     Bytes?
+  fileSign        Bytes?
+  createDate      DateTime   @default(now())
+  deleteDate      DateTime?
+}

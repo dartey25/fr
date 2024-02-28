@@ -1,0 +1,22 @@
+{
+  "root": "libs/cli/restart",
+  "name": "restart-cli",
+  "sourceRoot": "libs/cli/restart/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go build -o=../../../dist/libs/cli/restart.exe ./src/main.go",
+        "cwd": "libs/cli/restart"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go run ./src/main.go",
+        "cwd": "libs/cli/restart"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import url("iconmoon.css");
+@import url("bootstrap_limitless.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mocha {
+  background-color: rgb(234, 245, 234);
+}
+
+.command-item[aria-selected] {
+  background-color: #d5ebfd;
+}
+
+body {
+  @apply !tw-text-gray-900;
+}
+
+.DialogOverlay {
+  background: rgba(0 0 0 / 0.5);
+  position: fixed;
+  padding: 1.7rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.DialogContent {
+  min-width: 300px;
+  width: 900px;
+  background: white;
+  padding: 30px;
+  border-radius: 4px;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+  position: relative;
+  height: 100%;
+  flex-direction: column;
+}

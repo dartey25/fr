@@ -1,0 +1,9 @@
+{
+  "name": "eur-server",
+  "version": "0.0.19",
+  "main": "index.js",
+  "dependencies": {
+    "bytenode": "^1.5.3",
+    "prisma-schema-dsl": "^2.2.0"
+  }
+}

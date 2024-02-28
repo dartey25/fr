@@ -1,0 +1,43 @@
+{
+  "name": "eur-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/eur/api/src",
+  "projectType": "application",
+  "implicitDependencies": ["prisma-client-eur"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node apps/eur/api/esbuild.config.js"
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "eur-api:build",
+        "inspect": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "eur-api:build:development"
+        },
+        "production": {
+          "buildTarget": "eur-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/eur/api/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "eur-api",
+  "main": "main.js",
+  "dependencies": {
+    "prisma": "^5.7.1",
+    "bytenode": "^1.5.3",
+    "prisma-schema-dsl": "^2.2.0"
+  }
+}

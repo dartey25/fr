@@ -1,0 +1,5 @@
+
+
+[build]          # build for the target triple (ignored by `cargo install`)
+target-dir = "../../../dist/apps/helper"         # path of where to place all generated artifacts
+

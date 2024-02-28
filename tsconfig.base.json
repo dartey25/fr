@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2018",
+    "module": "ES2022",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "removeComments": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/core": ["libs/shared/core/src/index.js"],
+      "@/prisma/eur": ["libs/prisma/eur/client/src/index.ts"],
+      "@/schema": ["libs/shared/schema/src/index.ts"],
+      "@/schema/eur": ["libs/shared/schema/src/eur/index.ts"],
+      "@/schema/eur/customs": ["libs/shared/schema/src/eur/customs.ts"],
+      "@/schema/eur/database": ["libs/shared/schema/src/eur/database.ts"],
+      "@/schema/eur/license": ["libs/shared/schema/src/eur/license.ts"],
+      "@/shared-types": ["libs/shared/types/src/index.ts"],
+      "@/ui": ["libs/shared/ui/src/index.ts"],
+      "@/ui/*": ["libs/shared/ui/src/core/*", "libs/shared/ui/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
